@@ -4,9 +4,7 @@ var JavascriptTester = function() {
 JavascriptTester.prototype = {
     testRegex : function(config, testStrings) {
         var result = {
-            "type": "",
-            "resultList": [],
-            "exception": ""
+            "resultList": []
         };
 
         try {
@@ -83,7 +81,7 @@ JavascriptTester.prototype = {
 var main = function(){
     config = JSON.parse(process.argv[2]);
     testStrings = JSON.parse(process.argv[3]);
-    
+
     var tester = new JavascriptTester();
     result = tester.testRegex(config, testStrings);
     console.log("##START_RESULT##");
