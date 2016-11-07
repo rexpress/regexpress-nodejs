@@ -4,7 +4,9 @@ var JavascriptTester = function() {
 JavascriptTester.prototype = {
     testRegex : function(config, testStrings) {
         var result = {
-            "resultList": []
+            "result": {
+                "resultList": []
+            }
         };
 
         try {
@@ -29,16 +31,16 @@ JavascriptTester.prototype = {
                 case "match":
                     result["type"] = "MATCH";
                     testStrings.forEach(function(testString){
-                        result["resultList"].push(regex.test(testString) ? true : false);
+                        result["result"]["resultList"].push(regex.test(testString) ? true : false);
                     });
                     break;
                 case "group":
                     result["type"] = "GROUP";
-                    result["columns"] = [];
+                    result["result"]["columns"] = [];
 
                     var groupCount = (new RegExp(regex.toString() + '|')).exec('').length;
                     for(var i = 0; i < groupCount; i++) {
-                        result["columns"].push("Group #" + i);
+                        result["result"]["columns"].push("Group #" + i);
                     }
 
                     testStrings.forEach(function(testString) {
@@ -56,9 +58,9 @@ JavascriptTester.prototype = {
                             groupsList["list"].push(groups);
                         }
                         if(groupsList["list"].length > 0) {
-                            result["resultList"].push(groupsList);
+                            result["result"]["resultList"].push(groupsList);
                         } else {
-                            result["resultList"].push(null);
+                            result["result"]["resultList"].push(null);
                         }
                     });
                     break;
@@ -66,7 +68,7 @@ JavascriptTester.prototype = {
                     result["type"] = "STRING";
                     var replaceString = config["replace"];
                     testStrings.forEach(function(testString) {
-                        result["resultList"].push(testString.replace(regex, replaceString));
+                        result["result"]["resultList"].push(testString.replace(regex, replaceString));
                     });
                     break;
             }

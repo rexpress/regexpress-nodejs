@@ -10,7 +10,7 @@ config = {
     "regex":"[A-Za-z]\\d"
 };
 result = tester.testRegex(config, testStrings);
-assert.deepEqual(result["resultList"], [false, true]);
+assert.deepEqual(result["result"]["resultList"], [false, true]);
 
 config = {
     "test_type": "group",
@@ -18,7 +18,7 @@ config = {
     "regex":"([A-Za-z]*)"
 };
 result = tester.testRegex(config, testStrings);
-assert.deepEqual(result["resultList"], [{"list":[["Hello","Hello"]]},{"list":[["",""]]}]);
+assert.deepEqual(result["result"]["resultList"], [{"list":[["Hello","Hello"]]},{"list":[["",""]]}]);
 
 config = {
     "test_type": "replace",
@@ -26,4 +26,4 @@ config = {
     "replace":"$1!"
 };
 result = tester.testRegex(config, testStrings);
-assert.deepEqual(result["resultList"], ["Hello! Javascript Test","Hello!2 Javascript2 Test2"]);
+assert.deepEqual(result["result"]["resultList"], ["Hello! Javascript Test","Hello!2 Javascript2 Test2"]);
